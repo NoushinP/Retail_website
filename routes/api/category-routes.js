@@ -3,10 +3,10 @@ const { Category, Product } = require('../../models');
 
 
 router.get('/categories', (req, res) => {
-  Category.findAll({
-    include: [Product],
-  })
-    .then((categories) => res.json(categories))
+  Category.findAll()
+    .then((categories) => {
+      console.log(categories)
+      res.json(categories)})
     .catch((err) => res.status(500).json(err));
 });
 
@@ -24,6 +24,7 @@ router.get('/:id', (req, res) => {
 
 
 router.post('/', (req, res) => {
+  console.log(req.body)
   Category.create(req.body)
     .then((category) => res.status(200).json(category))
     .catch((err) => res.status(400).json(err));
